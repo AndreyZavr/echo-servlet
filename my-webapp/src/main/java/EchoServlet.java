@@ -10,6 +10,7 @@ import java.util.Date;
 /**
  *
  */
+//@WebServlet("/echo")
 public class EchoServlet extends HttpServlet {
 
     @Override
@@ -18,10 +19,14 @@ public class EchoServlet extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd'T'HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm");
         String date = sdf.format(new Date());
 
-        out.println(req.getParameter("text") + " : " + date);
+        String text = req.getParameter("text");
+        if (text == null) {
+            text = "";
+        }
+        out.println(text + " : " + date);
     }
 
 }
